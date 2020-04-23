@@ -1,54 +1,45 @@
-import React from 'react'
-import { storiesOf } from '@storybook/react'
+import React, { useState } from "react";
+import { storiesOf } from "@storybook/react";
 
-import Transition, { ENTERED, ENTERING } from '../src/Transition';
-import { Fade, Collapse } from './transitions/Bootstrap'
-import StoryFixture from './StoryFixture'
+import Transition, { ENTERED, ENTERING } from "../src/Transition";
+import StoryFixture from "./StoryFixture";
+import { Fade, Collapse } from "./transitions/Bootstrap";
 
-import { config } from '../src/index'
+function ToggleFixture({ defaultIn, description, children }) {
+  const [show, setShow] = useState(defaultIn);
 
-config.disabled = true
-
-class ToggleFixture extends React.Component {
-  state = { show: this.props.defaultIn }
-  render() {
-    return (
-      <StoryFixture description={this.props.description}>
-        <div style={{ marginBottom: 10 }}>
-          <button
-            onClick={() =>
-              this.setState(({ show }) => ({
-                show: !show,
-              }))
-            }
-          >
-            Toggle
-          </button>
-        </div>
-        {React.cloneElement(this.props.children, {
-          in: this.state.show,
-        })}
-      </StoryFixture>
-    )
-  }
+  return (
+    <StoryFixture description={description}>
+      <div style={{ marginBottom: 10 }}>
+        <button
+          onClick={() => {
+            setShow(!show);
+          }}
+        >
+          Toggle
+        </button>
+      </div>
+      {React.cloneElement(children, { in: show })}
+    </StoryFixture>
+  );
 }
 
-storiesOf('Transition', module)
-  .add('Bootstrap Fade', () => (
+storiesOf("Transition", module)
+  .add("Bootstrap Fade", () => (
     <ToggleFixture>
       <Fade>
         <div>asaghasg asgasg</div>
       </Fade>
     </ToggleFixture>
   ))
-  .add('Bootstrap Fadelazy mounting', () => (
+  .add("Bootstrap Fadelazy mounting", () => (
     <ToggleFixture>
       <Fade mountOnEnter unmountOnExit>
         <div>asaghasg asgasg</div>
       </Fade>
     </ToggleFixture>
   ))
-  .add('Bootstrap Collapse', () => (
+  .add("Bootstrap Collapse", () => (
     <ToggleFixture>
       <Collapse>
         <div>
@@ -59,26 +50,22 @@ storiesOf('Transition', module)
       </Collapse>
     </ToggleFixture>
   ))
-  .add('Appearing Animation', () => {
+  .add("Appearing Animation", () => {
     const duration = 300;
     const defaultStyle = {
-      position: 'absolute',
+      position: "absolute",
       transition: `left ${duration}ms ease-in-out`,
       left: 0,
     };
 
-     const transitionStyles = {
-      [ENTERING]: { left: '50%' },
-      [ENTERED]: { left: '50%' },
+    const transitionStyles = {
+      [ENTERING]: { left: "50%" },
+      [ENTERED]: { left: "50%" },
     };
 
-     return (
-      <Transition
-      in={true}
-      appear={true}
-      timeout={duration}
-    >
-      {state => (
+    return (
+      <Transition in={true} appear={true} timeout={duration}>
+        {(state) => (
           <div
             style={{
               ...defaultStyle,
@@ -87,7 +74,7 @@ storiesOf('Transition', module)
           >
             This is an appearing animation
           </div>
-      )}
-    </Transition>
-    )
-  })
+        )}
+      </Transition>
+    );
+  });

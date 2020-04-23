@@ -421,10 +421,9 @@ Transition.propTypes = {
   unmountOnExit: PropTypes.bool,
 
   /**
-   * Normally a component is not transitioned if it is shown when the
-   * `<Transition>` component mounts. If you want to transition on the first
-   * mount set `appear` to `true`, and the component will transition in as soon
-   * as the `<Transition>` mounts.
+   * By default the child component does not perform the enter transition when
+   * it first mounts, regardless of the value of `in`. If you want this
+   * behavior, set both `appear` and `in` to `true`.
    *
    * > **Note**: there are no special appear states like `appearing`/`appeared`, this prop
    * > only adds an additional enter transition. However, in the
@@ -556,10 +555,10 @@ Transition.defaultProps = {
   onExited: noop,
 }
 
-Transition.UNMOUNTED = 0
-Transition.EXITED = 1
-Transition.ENTERING = 2
-Transition.ENTERED = 3
-Transition.EXITING = 4
+Transition.UNMOUNTED = UNMOUNTED
+Transition.EXITED = EXITED
+Transition.ENTERING = ENTERING
+Transition.ENTERED = ENTERED
+Transition.EXITING = EXITING
 
 export default Transition

@@ -8,5 +8,15 @@
     "bundled": 46844,
     "minified": 14384,
     "gzipped": 4539
+  },
+  "lib/dist/react-transition-group.js": {
+    "bundled": 94119,
+    "minified": 25634,
+    "gzipped": 7822
+  },
+  "lib/dist/react-transition-group.min.js": {
+    "bundled": 53462,
+    "minified": 17571,
+    "gzipped": 5515
   }
 }
